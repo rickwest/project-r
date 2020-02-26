@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('auth_content')
 <form method="POST" action="{{ route('password.confirm') }}" class="card">
