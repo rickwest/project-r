@@ -1,6 +1,14 @@
 /node_modules
 /public/hot
 /public/storage
+
+# Ignore assets that are built
+/public/css
+/public/js
+/public/images/vendor
+/public/fonts
+/public/mix-manifest.json
+
 /storage/*.key
 /vendor
 .env
