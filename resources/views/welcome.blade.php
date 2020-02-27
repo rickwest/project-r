@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('content')
+@section('body')
 <div class="header py-4">
     <div class="container">
         <div class="d-flex">

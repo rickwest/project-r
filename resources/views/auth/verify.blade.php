@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('auth_content')
+@section('content')
 <div class="card">
     <div class="card-body p-6">
         <div class="card-title text-center">{{ __('Verify Your Email Address') }}</div>

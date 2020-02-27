@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('content')
+@section('body')
 <div class="header py-4">
     <div class="container">
         <div class="d-flex">
@@ -8,7 +8,7 @@
                 <img src="{{ asset('images/logo.svg') }}" class="header-brand-img" alt="{{ config('app.name', 'Laravel') }} logo">
             </a>
             <div class="d-flex order-lg-2 ml-auto">
-                @yield('auth_nav')
+                @yield('nav')
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col col-login mx-auto">
-                @yield('auth_content')
+                @yield('content')
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('auth_content')
+@section('content')
 <form method="POST" action="{{ route('password.email') }}" class="card">
     @csrf
     <div class="card-body p-6">

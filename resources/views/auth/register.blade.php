@@ -1,12 +1,12 @@
 @extends('layouts.auth')
 
-@section('auth_nav')
+@section('nav')
     <div class="nav-item d-none d-md-flex">
         <a href="{{ route('login') }}" class="btn btn-sm btn-outline-primary">{{ __('Login') }}</a>
     </div>
 @endsection
 
-@section('auth_content')
+@section('content')
 <form method="POST" action="{{ route('register') }}" class="card">
     @csrf
     <div class="card-body p-6">

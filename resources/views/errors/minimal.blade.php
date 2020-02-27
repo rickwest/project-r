@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('content')
+@section('body')
 <div class="page-content">
     <div class="container text-center">
         <div class="display-1 text-muted mb-5"><i class="si si-exclamation"></i> @yield('code')</div>

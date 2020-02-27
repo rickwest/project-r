@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app" class="page">
-        @yield('content')
+        @yield('body')
     </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('auth_content')
+@section('content')
 <form method="POST" action="{{ route('password.update') }}" class="card">
     @csrf
     <input type="hidden" name="token" value="{{ $token }}">
