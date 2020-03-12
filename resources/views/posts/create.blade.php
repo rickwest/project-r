@@ -3,11 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-body">
-                <new-post csrf-token="{{  csrf_token() }}"></new-post>
-            </div>
-        </div>
+        <posts-create v-bind:user="{{ Auth::user() }}" csrf-token="{{ csrf_token() }}"></posts-create>
     </div>
 </div>
 @endsection

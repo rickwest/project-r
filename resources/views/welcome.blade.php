@@ -32,10 +32,10 @@
                     @guest
                         <a href="{{ route('register') }}" class="btn btn-primary btn-block my-5">{{ __('Register') }}</a>
                         <div class="text-center text-muted">
-                            Already a member? {{ __('Login') }}
+                            Already a member? <a href="{{ route('login') }}">{{ __('Login') }}</a>
                         </div>
                     @else
-                        <a href="/garage" class="btn btn-primary btn-block my-5">Continue as {{ Auth::user()->name }}</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-primary btn-block my-5">Continue as {{ Auth::user()->name }}</a>
                         <div class="text-center text-muted">
                             Not {{ Auth::user()->name }}? <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Switch Accounts</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

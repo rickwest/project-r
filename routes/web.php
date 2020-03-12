@@ -17,12 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function () {
+    // Dashboard
+    Route::get('dashboard', 'DashboardController')->name('dashboard');
 
-//Route::get('/', 'PostController@index');
-//Route::get('/{posts}', 'PostController@show');
-Route::get('/posts/new', 'PostController@create')->name('posts.create');
-Route::post('posts', 'PostController@store')->name('posts.store');
-Route::post('posts/images', 'PostController@images');
-//Route::patch('/{posts}', 'PostController@update');
-//Route::delete('/{posts}', 'PostController@destroy');
+    // Posts
+    Route::resource('posts', 'PostController', ['except' => [
+//    'index', 'show', 'new,'
+    ]]);
+    Route::post('posts/image', 'PostController@storeImage');
+});

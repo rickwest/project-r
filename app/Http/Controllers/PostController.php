@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,17 +13,17 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
-//        return view()response()->json(Post::paginate(10));
+        return response()->json(Post::paginate(10));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new post.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
@@ -29,34 +31,38 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created post in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
-        dd($request->all());
-//        $this->validator($request->all())->validate();
-//
-//        $posts = Post::create([
-//            'title' => $request['title'],
-//            'body' => $request['body'],
-//            'user_id' => $request->user()->id,
-//        ]);
-//
-//        return response()->json($posts);
+        $this->validator($request->all())->validate();
+
+        $post = Post::create([
+            'title' => $request['title'],
+            'body' => $request['body'],
+            'images' => $request['images'],
+            'user_id' => $request->user()->id,
+        ]);
+
+        $request->session()->flash('success', 'Posted! You\'re now viewing the live post.');
+
+        return response()->json($post);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified post.
      *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return View
      */
     public function show(Post $post)
     {
-//        return $posts;
+        return view('posts.show', [
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -102,12 +108,17 @@ class PostController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'title' => 'required',
             'body' => 'required',
+            'title' => 'sometimes|max:255',
+            'images' => 'sometimes|array',
         ]);
     }
 
-    public function images(Request $request) {
+    /**
+     * @param Request $request
+     * @return false|string
+     */
+    public function storeImage(Request $request) {
         $request->validate([
             'file' => 'required|file|image'
         ]);
@@ -115,6 +126,5 @@ class PostController extends Controller
         $path = $request->file('file')->store('posts');
 
         return $path;
-//        return $file->store('posts');
     }
 }

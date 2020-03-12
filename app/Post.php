@@ -18,6 +18,14 @@ class Post extends Model
         'user_id',
         'title',
         'body',
+        'images',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'images' => 'array',
     ];
 
     /**
@@ -26,6 +34,21 @@ class Post extends Model
     protected $dates = [
         'created_at',
     ];
+
+    /**
+     * @var array
+     */
+    protected $appends = [
+        'url',
+    ];
+
+    /**
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return route('posts.show', ['post' => $this], true);
+    }
 
     /**
      * The "booting" method of the posts model.
