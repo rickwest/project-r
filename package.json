@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "tabler-ui": "0.0.34",
+        "vue-infinite-loading": "^2.4.5",
         "vue2-dropzone": "^3.6.0"
     }
 }
