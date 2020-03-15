@@ -10,10 +10,18 @@
 @endsection
 
 @section('content-center')
-<form class="card" action="{{ route('profile.update') }}" method="POST">
+<form class="card" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="card-body">
+        <div class="form-group">
+            <label class="form-label" for="avatar">Current Photo</label>
+            <span class="avatar avatar-xxl mb-5" @if($profile->avatar)style="background-image: url({{ $profile->avatar }})"@endif>@unless($profile->avatar){{ $profile->initials }}@endunless</span>
+            <input id="avatar" type="file" class="form-control-file @error('avatar') is-invalid @enderror" name="avatar" />
+            @error('avatar')
+            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
+        </div>
         <div class="form-group">
             <label class="form-label" for="first_name">First Name</label>
             <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ $profile->first_name }}" autofocus>

@@ -2,26 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the specified profile.
-     *
-     * @param Profile  $profile
-     * @return Response
-     */
-    public function show(Profile $profile)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the profile of the authenticated user.
      *
@@ -43,9 +30,16 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedData = $this->validator($request->all())->validate();
+        $this->validator($request->all())->validate();
 
-        $request->user()->profile()->update($validatedData);
+        $request->user()->profile()->update($request->only([
+            'first_name', 'last_name', 'bio', 'location', 'occupation'
+        ]));
+
+
+        if ($request->avatar) {
+            $request->user()->profile->addMediaFromRequest('avatar')->toMediaCollection('avatars');
+        }
 
         $request->session()->flash('success', 'Profile updated successfully!');
 
@@ -66,6 +60,7 @@ class ProfileController extends Controller
             'bio' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:128',
             'occupation' => 'nullable|string|max:128',
+            'avatar' => 'nullable|image|max:2048',
         ]);
     }
 }
