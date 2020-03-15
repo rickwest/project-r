@@ -18,12 +18,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
+    // Profile
+    Route::get('/profile', 'ProfileController@edit')->name('profile.edit');
+    Route::put('/profile', 'ProfileController@update')->name('profile.update');
+
     // Dashboard
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
-    // Posts
-    Route::resource('posts', 'PostController', ['except' => [
-//    'index', 'show', 'new,'
-    ]]);
-    Route::post('posts/image', 'PostController@storeImage');
+    // Post
+    Route::get('/posts', 'PostController@index');
+    Route::get('/post/{post}', 'PostController@show')->name('post.show');
+    Route::post('/post/{post}', 'PostController@store')->name('post.store');
+    Route::get('post/new', 'PostController@create')->name('post.create');
+
+    Route::post('post/image', 'PostController@storeImage');
 });
