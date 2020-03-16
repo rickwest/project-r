@@ -14,6 +14,8 @@ class Profile extends Model implements HasMedia
     use HasMediaTrait;
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -22,6 +24,25 @@ class Profile extends Model implements HasMedia
         'bio',
         'location',
         'occupation',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'initials',
+        'avatar',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'media'
     ];
 
     /**
@@ -35,12 +56,14 @@ class Profile extends Model implements HasMedia
     }
 
     /**
+     * Get the users avatar url
+     *
      * @return string|null
      */
     public function getAvatarAttribute()
     {
         if ($this->hasMedia('avatars')) {
-            return $this->getFirstMediaUrl('avatars');
+            return $this->getFirstMediaUrl('avatars', 'thumbnail');
         }
 
         return null;
@@ -68,11 +91,10 @@ class Profile extends Model implements HasMedia
     }
 
     /**
-     * Register media collections for profile
+     * Register media collections for a profile.
      */
     public function registerMediaCollections()
     {
-        $this->addMediaCollection('avatars')
-            ->onlyKeepLatest(1);
+        $this->addMediaCollection('avatar')->singleFile();
     }
 }

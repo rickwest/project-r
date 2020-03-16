@@ -17,7 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return response()->json(Post::paginate(10));
+        $posts = Post::with(['user', 'user.profile']);
+
+        return response()->json($posts->paginate(10));
     }
 
     /**

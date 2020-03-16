@@ -38,7 +38,7 @@ class ProfileController extends Controller
 
 
         if ($request->avatar) {
-            $request->user()->profile->addMediaFromRequest('avatar')->toMediaCollection('avatars');
+            $request->user()->profile->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 
         $request->session()->flash('success', 'Profile updated successfully!');

@@ -1,15 +1,17 @@
 <template>
     <div>
         <div class="card" v-for="item in list">
-            <a href="#"><img class="card-img-top" src="https://www.tegiwaimports.com/blog/wp-content/uploads/2020/02/EP3-OultonPark-TypeRTrophy-3-640x427.jpg" alt="And this isn't my nose. This is a false one."></a>
-            <div class="card-body d-flex flex-column">
-                <h4><a href="#">{{ item.title }}</a></h4>
+            <a :href="item.url" v-if="item.images.length">
+                <img class="card-img-top" :src="item.images[0]" :alt="item.title">
+            </a>
+            <div class="card-body">
+                <h4><a :href="item.url">{{ item.title }}</a></h4>
                 <div class="text-muted">{{ item.body }}</div>
                 <div class="d-flex align-items-center pt-5 mt-auto">
-                    <div class="avatar avatar-md mr-3" style="background-image: url(./demo/faces/female/18.jpg)"></div>
+                    <div class="avatar avatar-md mr-3" :style="`background-image: url(${item.user.profile.avatar})`" v-if="item.user.profile.avatar"></div>
                     <div>
-                        <a href="./profile.html" class="text-default">Rose Bradley</a>
-                        <small class="d-block text-muted">3 days ago</small>
+                        <a :href="`/${item.user.name}`" class="text-default">{{ item.user.name }}</a>
+                        <small class="d-block text-muted">{{ item.fromNow }}</small>
                     </div>
                     <div class="ml-auto text-muted">
                         <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i class="fe fe-heart mr-1"></i></a>
