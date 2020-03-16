@@ -40,9 +40,7 @@ class Profile extends Model implements HasMedia
     public function getAvatarAttribute()
     {
         if ($this->hasMedia('avatars')) {
-            $media = $this->getMedia('avatars')->last();
-
-            return $media->getUrl('thumbnail');
+            return $this->getFirstMediaUrl('avatars');
         }
 
         return null;
@@ -67,5 +65,14 @@ class Profile extends Model implements HasMedia
         $this->addMediaConversion('thumbnail')
             ->width(80)
             ->height(80);
+    }
+
+    /**
+     * Register media collections for profile
+     */
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('avatars')
+            ->onlyKeepLatest(1);
     }
 }
