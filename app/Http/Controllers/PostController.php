@@ -40,19 +40,15 @@ class PostController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        $post = Post::create([
-            'title' => $request['title'],
-            'body' => $request['body'],
-            'user_id' => $request->user()->id,
-        ]);
+        $post = $request->user()->posts()->create($request->all());
 
-        if ($request->images) {
-            collect($request->images)->map(function ($image) use ($post) {
-                $post->addMediaFromDisk($image)->toMediaCollection('images');
+        if ($request->media) {
+            collect($request->media)->map(function ($media) use ($post) {
+                $post->addMediaFromDisk($media)->toMediaCollection('images');
             });
         }
 
-        $request->session()->flash('success', 'Posted! You\'re now viewing the live post.');
+        $request->session()->flash('success', "Posted! You're now viewing the live post.");
 
         return response()->json($post);
     }
@@ -113,23 +109,9 @@ class PostController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'body' => 'required',
-            'title' => 'sometimes|max:255',
-            'images' => 'sometimes|array',
+            'body' => 'required|string',
+            'title' => 'nullable|string|max:255',
+            'media' => 'nullable|array',
         ]);
-    }
-
-    /**
-     * @param Request $request
-     * @return false|string
-     */
-    public function storeImage(Request $request) {
-        $request->validate([
-            'file' => 'required|image'
-        ]);
-
-        $path = $request->file('file')->store('post') ;
-
-        return $path;
     }
 }

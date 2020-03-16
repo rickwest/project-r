@@ -21,14 +21,6 @@ class Post extends Model implements HasMedia
         'user_id',
         'title',
         'body',
-        'images',
-    ];
-
-    /**
-     * @var array
-     */
-    protected $casts = [
-        'images' => 'array',
     ];
 
     /**

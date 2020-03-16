@@ -23,12 +23,15 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
     // Dashboard
-    Route::get('dashboard', 'DashboardController')->name('dashboard');
+    Route::get('/dashboard', 'DashboardController')->name('dashboard');
 
     // Post
     Route::get('/posts', 'PostController@index');
     Route::get('post/new', 'PostController@create')->name('post.create');
     Route::get('/post/{post}', 'PostController@show')->name('post.show');
     Route::post('/post', 'PostController@store')->name('post.store');
-    Route::post('post/image', 'PostController@storeImage');
+
+    // Media
+    Route::post('/media', 'MediaController@store');
+    Route::delete('/media', 'MediaController@destroy');
 });
