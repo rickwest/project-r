@@ -32,7 +32,6 @@
         <vue-dropzone id="post-image-dropzone" :options="dropzoneOptions" v-on:vdropzone-success="onUploadSuccess"></vue-dropzone>
     </div>
 </div>
-
 </template>
 
 <script>
@@ -53,7 +52,7 @@ export default {
             },
             errors: {},
             dropzoneOptions: {
-                url: '/posts/image',
+                url: '/post/image',
                 thumbnailWidth: 150,
                 maxFilesize: 2,
                 headers: { "X-CSRF-TOKEN": this.csrfToken },
@@ -70,7 +69,7 @@ export default {
         submit: function () {
             this.errors = {};
 
-            axios.post('/posts', this.fields)
+            axios.post('/post', this.fields)
                 .then(response => {
                     this.fields = {
                         title: '',

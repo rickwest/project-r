@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Return a paginated collection of posts.
      *
      * @return JsonResponse
      */
@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('post.create');
     }
 
     /**
@@ -43,9 +43,14 @@ class PostController extends Controller
         $post = Post::create([
             'title' => $request['title'],
             'body' => $request['body'],
-            'images' => $request['images'],
             'user_id' => $request->user()->id,
         ]);
+
+        if ($request->images) {
+            collect($request->images)->map(function ($image) use ($post) {
+                $post->addMediaFromDisk($image)->toMediaCollection('images');
+            });
+        }
 
         $request->session()->flash('success', 'Posted! You\'re now viewing the live post.');
 
@@ -60,7 +65,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show', [
+        return view('post.show', [
             'post' => $post,
         ]);
     }
@@ -120,10 +125,10 @@ class PostController extends Controller
      */
     public function storeImage(Request $request) {
         $request->validate([
-            'file' => 'required|file|image'
+            'file' => 'required|image'
         ]);
 
-        $path = $request->file('file')->store('posts');
+        $path = $request->file('file')->store('post') ;
 
         return $path;
     }

@@ -5,7 +5,7 @@
                 <img src="{{ asset('images/logo.svg') }}" class="header-brand-img" alt="{{ config('app.name') }} logo">
             </a>
             <div class="d-flex order-lg-2 ml-auto">
-Q                <div class="nav-item">
+                <div class="nav-item">
                     <a href="{{ route('post.create') }}" class="btn btn-sm btn-outline-primary"><i class="fe fe-plus-circle"></i><span class="d-none d-md-inline-flex">&nbsp;Create a post</span></a>
                 </div>
                 <div class="dropdown">

@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
     use SoftDeletes;
+    use HasMediaTrait;
 
     /**
      * @var array
@@ -47,7 +50,7 @@ class Post extends Model
      */
     public function getUrlAttribute()
     {
-        return route('posts.show', ['post' => $this], true);
+        return route('post.show', ['post' => $this], true);
     }
 
     /**

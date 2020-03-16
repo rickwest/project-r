@@ -29,6 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts', 'PostController@index');
     Route::get('post/new', 'PostController@create')->name('post.create');
     Route::get('/post/{post}', 'PostController@show')->name('post.show');
-    Route::post('/post/{post}', 'PostController@store')->name('post.store');
+    Route::post('/post', 'PostController@store')->name('post.store');
     Route::post('post/image', 'PostController@storeImage');
 });
