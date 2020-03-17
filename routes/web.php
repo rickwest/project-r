@@ -34,4 +34,7 @@ Route::middleware('auth')->group(function () {
     // Media
     Route::post('/media', 'MediaController@store');
     Route::delete('/media', 'MediaController@destroy');
+
+    // User - Route must be last to ensure attempt to match all other routes first
+    Route::get('/{user}', 'UserController')->name('user');
 });

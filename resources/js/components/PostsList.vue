@@ -6,7 +6,7 @@
             </a>
             <div class="card-body">
                 <h4><a :href="item.url">{{ item.title }}</a></h4>
-                <div class="text-muted">{{ item.body }}</div>
+                <div class="text-muted">{{ getExcerpt(item.body) }}</div>
                 <div class="d-flex align-items-center pt-5 mt-auto">
                     <div class="avatar avatar-md mr-3" :style="`background-image: url(${item.user.profile.avatar})`" v-if="item.user.profile.avatar"></div>
                     <div>
@@ -38,7 +38,7 @@ export default {
         };
     },
     methods: {
-        infiniteHandler($state) {
+        infiniteHandler: function($state) {
             axios.get('/posts', {
                 params: {
                     page: this.page,
@@ -55,6 +55,12 @@ export default {
                     $state.complete();
                 }
             });
+        },
+        getExcerpt: function(text, length = 140) {
+            if (text.length > length) {
+                text = text.slice(0, length);
+            }
+            return `${text}...`;
         },
     },
     components: {

@@ -16,6 +16,9 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                        <a class="dropdown-item" href="{{ route('user', ['user' => Auth::user()]) }}">
+                            <i class="dropdown-icon fe fe-user"></i> My Profile
+                        </a>
                         <a class="dropdown-item" href="{{ route('profile.edit') }}">
                             <i class="dropdown-icon fe fe-settings"></i> Settings
                         </a>
