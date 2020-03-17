@@ -20,9 +20,8 @@
             </div>
         </div>
         <infinite-loading @infinite="infiniteHandler">
-            <span slot="no-more">
-                You're all caught up!
-            </span>
+            <span class="text-muted" slot="no-more">You're all caught up! 😀</span>
+            <span class="text-muted" slot="no-results">Nothing to see here! 🙈</span>
         </infinite-loading>
     </div>
 </template>
