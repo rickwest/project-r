@@ -56,6 +56,16 @@ class Profile extends Model implements HasMedia
     }
 
     /**
+     * Get the users full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' .$this->last_name;
+    }
+
+    /**
      * Get the users avatar url
      *
      * @return string|null

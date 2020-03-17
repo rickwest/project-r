@@ -13,11 +13,16 @@ class PostController extends Controller
     /**
      * Return a paginated collection of posts.
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
         $posts = Post::with(['user', 'user.profile']);
+
+        if ($request->has('user_id')) {
+            $posts->where('user_id', $request->get('user_id'));
+        }
 
         return response()->json($posts->paginate(10));
     }

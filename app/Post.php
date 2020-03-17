@@ -43,6 +43,7 @@ class Post extends Model implements HasMedia
     protected $appends = [
         'url',
         'fromNow',
+        'images',
     ];
 
     /**

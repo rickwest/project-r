@@ -30,6 +30,7 @@
 import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
+    props: ['user_id'],
     data() {
         return {
             list: [],
@@ -38,11 +39,15 @@ export default {
     },
     methods: {
         infiniteHandler: function($state) {
-            axios.get('/posts', {
-                params: {
-                    page: this.page,
-                },
-            }).then(({ data }) => {
+            const params = {
+                page: this.page,
+            };
+            if (this.user_id) {
+                params['user_id'] = this.user_id;
+            }
+
+            axios.get('/posts', {params})
+            .then(({ data }) => {
                 if (data.data.length) {
                     this.page += 1;
                     this.list.push(...data.data);
