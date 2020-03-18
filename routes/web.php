@@ -25,6 +25,9 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', 'DashboardController')->name('dashboard');
 
+    // Search
+    Route::get('/search', 'SearchController');
+
     // Post
     Route::get('/posts', 'PostController@index');
     Route::get('post/new', 'PostController@create')->name('post.create');

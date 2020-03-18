@@ -34,6 +34,7 @@ class Profile extends Model implements HasMedia
     protected $appends = [
         'initials',
         'avatar',
+        'full_name'
     ];
 
     /**
@@ -72,8 +73,8 @@ class Profile extends Model implements HasMedia
      */
     public function getAvatarAttribute()
     {
-        if ($this->hasMedia('avatars')) {
-            return $this->getFirstMediaUrl('avatars', 'thumbnail');
+        if ($this->hasMedia('avatar')) {
+            return $this->getFirstMediaUrl('avatar', 'thumbnail');
         }
 
         return null;
