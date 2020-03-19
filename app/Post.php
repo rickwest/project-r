@@ -43,8 +43,10 @@ class Post extends Model implements HasMedia
      */
     protected $appends = [
         'url',
-        'fromNow',
+        'from_now',
         'images',
+        'liked',
+        'likes_count',
     ];
 
     /**
@@ -98,6 +100,16 @@ class Post extends Model implements HasMedia
     public function getFromNowAttribute()
     {
         return $this->created_at->diffForHumans();
+    }
+
+    /**
+     * Get is post liked by current user.
+     *
+     * @return bool
+     */
+    public function getLikedAttribute()
+    {
+        return $this->liked();
     }
 
     /**

@@ -19,5 +19,5 @@
 @endsection
 
 @section('content-center')
-<posts-list user_id="{{ $user->id }}"></posts-list>
+<posts user_id="{{ $user->id }}"></posts>
 @endsection
