@@ -13,6 +13,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Post extends Model implements HasMedia
 {
     use SoftDeletes;
+    use Likeable;
     use HasMediaTrait;
 
     /**

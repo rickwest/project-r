@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/post/{post}', 'PostController@show')->name('post.show');
     Route::post('/post', 'PostController@store')->name('post.store');
 
+    // Post Like
+    Route::put('/post/{post}/like', 'PostLikeController');
+
     // Media
     Route::post('/media', 'MediaController@store');
     Route::delete('/media', 'MediaController@destroy');
