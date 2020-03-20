@@ -10,13 +10,13 @@
                 </div>
                 <div class="dropdown">
                     <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-                        <span class="avatar" @if(Auth::user()->profile->avatar)style="background-image: url({{ Auth::user()->profile->avatar }})"@endif>@unless(Auth::user()->profile->avatar){{ Auth::user()->profile->initials }}@endunless</span>
+                        <span class="avatar" @if($authUser->profile->avatar)style="background-image: url({{ $authUser->profile->avatar }})"@endif>@unless($authUser->profile->avatar){{ $authUser->profile->initials }}@endunless</span>
                         <span class="ml-2 d-none d-lg-block">
-                            <span class="text-default">{{ Auth::user()->name }}</span>
+                            <span class="text-default">{{ $authUser->name }}</span>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="{{ route('user', ['user' => Auth::user()]) }}">
+                        <a class="dropdown-item" href="{{ route('user', ['user' => $authUser]) }}">
                             <i class="dropdown-icon fe fe-user"></i> My Profile
                         </a>
                         <a class="dropdown-item" href="{{ route('profile.edit') }}">
