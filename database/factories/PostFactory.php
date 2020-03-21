@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Post;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
@@ -10,7 +11,8 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'body' => $faker->paragraph,
         'user_id' => function () {
-            return factory(App\User::class)->create()->id;
-        }
+            return factory(User::class)->create()->id;
+        },
+        'created_at' => $faker->dateTimeThisYear,
     ];
 });
