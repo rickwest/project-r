@@ -32,7 +32,9 @@
         <h4><a href="{{ $post->url }}">{{ $post->title }}</a></h4>
         <div class="text-muted">{{ $post->body }}</div>
         <div class="d-flex align-items-center pt-5 mt-auto">
-            <div class="avatar avatar-md mr-3" style="background-image: url({{ $post->user->profile->avatar }})"></div>
+            <div class="avatar avatar-md mr-3" @if ($post->user->profile->avatar)style="background-image: url({{ $post->user->profile->avatar }})"@endif>
+                @unless($post->user->profile->avatar){{ $post->user->profile->initials }}@endunless
+            </div>
             <div>
                 <a href="{{ route('user', ['user' => $post->user]) }}" class="text-default">{{ $post->user->name }}</a>
                 <small class="d-block text-muted">{{ $post->from_now }}</small>
@@ -43,4 +45,5 @@
         </div>
     </div>
 </div>
+<post-comments post_id="{{$post->id}}"></post-comments>
 @endsection

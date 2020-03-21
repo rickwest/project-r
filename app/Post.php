@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -73,7 +74,7 @@ class Post extends Model implements HasMedia
     }
 
     /**
-     * The user that the posts belongs to.
+     * The user that the post belongs to.
      *
      * @return BelongsTo
      */
@@ -81,6 +82,17 @@ class Post extends Model implements HasMedia
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * The comments on the post.
+     *
+     * @return HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 
     /**
      * Get the absolute url for the post.
