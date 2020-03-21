@@ -24,7 +24,8 @@
             <h4><a :href="post.url">{{ post.title }}</a></h4>
             <div class="text-muted">{{ getExcerpt(post.body) }} <a :href="`/post/${post.id}`">more</a></div>
             <div class="d-flex align-items-center pt-5 mt-auto">
-                <div class="avatar avatar-md mr-3" :style="`background-image: url(${post.user.profile.avatar})`"></div>
+                <div v-if="post.user.profile.avatar" class="avatar avatar-md mr-3" :style="`background-image: url(${post.user.profile.avatar})`"></div>
+                <div v-else-if="post.user.profile.initials" class="avatar avatar-md mr-3">{{ post.user.profile.initials }}</div>
                 <div>
                     <a :href="`/${post.user.name}`" class="text-default">{{ post.user.name }}</a>
                     <small class="d-block text-muted">{{ post.from_now }}</small>

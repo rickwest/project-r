@@ -34,16 +34,7 @@ trait Likeable
     {
         $userId = $userId ?? $this->getAuthenticatedUserId();
 
-        $like = $this->likes()->where('user_id', $userId)
-            ->withTrashed()
-            ->first();
-
-        // If no existing like then create a new one.
-        if (! $like) {
-            $like = $this->likes()->create([
-                'user_id' => $userId,
-            ]);
-        }
+        $like = $this->likes()->where('user_id', $userId)->withTrashed()->firstOrCreate(['user_id' => $userId]);
 
         // If like is soft deleted then restore it.
         if ($like->trashed()) {
@@ -62,11 +53,11 @@ trait Likeable
     {
         $userId = $userId ?? $this->getAuthenticatedUserId();
 
-        $like = $this->likes()->where('user_id', $userId)->first();
+        $like = $this->likes()->where('user_id', $userId)->delete();
 
-        if ($like) {
-            $like->delete();
-        }
+//        if ($like) {
+//            $like->delete();
+//        }
     }
 
     /**
@@ -115,11 +106,9 @@ trait Likeable
     }
 
     /**
-     * Get the authenticated user id.
-     *
-     * @return int
+     * @return int|string|null
      */
-    protected function getAuthenticatedUserId(): int
+    protected function getAuthenticatedUserId()
     {
         return auth()->id();
     }

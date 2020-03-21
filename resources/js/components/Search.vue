@@ -15,7 +15,8 @@
 >
     <template slot-scope="{suggestion}">
         <div class="d-flex">
-            <span class="avatar avatar-md mr-5" :style="`background-image: url(${suggestion.item.profile.avatar})`"></span>
+            <span v-if="suggestion.item.profile.avatar" class="avatar avatar-md mr-5" :style="`background-image: url(${suggestion.item.profile.avatar})`"></span>
+            <span v-else-if="suggestion.item.profile.initials" class="avatar avatar-md mr-5">{{ suggestion.item.profile.initials }}</span>
             <div class="media-body">
                 <h4 class="m-0">{{ suggestion.item.name }}</h4>
                 <p class="text-muted mb-0">{{ suggestion.item.profile.full_name }}</p>
@@ -104,7 +105,7 @@ export default {
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         border-radius: 5px;
         position: absolute;
-        z-index: 1;
+        z-index: 10;
     }
 }
 </style>
