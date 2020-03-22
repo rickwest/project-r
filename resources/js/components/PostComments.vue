@@ -18,7 +18,7 @@
         </div>
     </form>
     <ul class="list-group card-list-group">
-        <li class="list-group-item py-5" v-for="comment in comments">
+        <li class="list-group-item" v-for="comment in comments">
             <div class="media">
                 <div v-if="comment.user.profile.avatar" class="media-object avatar mr-4" :style="`background-image: url(${comment.user.profile.avatar})`"></div>
                 <div v-else-if="comment.user.profile.initials" class="media-object avatar mr-4">{{ comment.user.profile.initials }}</div>
@@ -33,7 +33,7 @@
 
 <script>
     export default {
-        props: ['post_id'],
+        props: ['postId'],
         data() {
             return {
                 comments: [],
@@ -43,8 +43,15 @@
                 errors: {},
             };
         },
-        mounted() {
-            this.getComments();
+        created() {
+            this.fetchComments();
+
+            const channel = `post.${this.postId}.comment`;
+
+            Echo.private(channel)
+                .listen("CommentPosted", (e) => {
+                   this.comments.push(e.comment);
+                });
         },
         computed: {
             submittable: function () {
@@ -52,18 +59,18 @@
             }
         },
         methods: {
-            getComments: function() {
+            fetchComments: function() {
                 axios
-                    .get(`/post/${this.post_id}/comments`)
+                    .get(`/post/${this.postId}/comments`)
                     .then(({ data }) => {
                         this.comments = data;
                     });
             },
             submit: function () {
-                this.errors = {}; // clear any errors
+                this.errors = {};
 
                 axios
-                    .post(`/post/${this.post_id}/comment`, {
+                    .post(`/post/${this.postId}/comment`, {
                         body: this.fields.body,
                     })
                     .then(res => {
