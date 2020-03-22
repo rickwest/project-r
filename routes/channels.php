@@ -14,3 +14,18 @@
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+// Posts
+Broadcast::channel('posts', function ($user) {
+    return Auth::check();
+});
+
+// Post Comment
+Broadcast::channel('post.{post_id}.comment', function ($user) {
+    return Auth::check();
+});
+
+// Post Like
+Broadcast::channel('post.{post_id}.like', function ($user) {
+    return Auth::check();
+});

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Events\CommentPosted;
 use App\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -38,6 +39,8 @@ class PostCommentController extends Controller
             'user_id' => $request->user()->id,
             'body' => $request->body,
         ]);
+
+        event(new CommentPosted($comment));
 
         return response()->json($comment);
     }

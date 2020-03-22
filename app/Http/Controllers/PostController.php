@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostPosted;
 use App\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -18,7 +19,7 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::with(['user', 'user.profile']);
+        $posts = Post::query();
 
         if ($request->has('user_id')) {
             $posts->where('user_id', $request->get('user_id'));
@@ -56,6 +57,8 @@ class PostController extends Controller
         }
 
         $request->session()->flash('success', "Posted! You're now viewing the live post.");
+
+        event(new PostPosted($post));
 
         return response()->json($post);
     }

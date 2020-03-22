@@ -46,8 +46,6 @@ class Post extends Model implements HasMedia
         'url',
         'from_now',
         'images',
-        'liked',
-        'likes_count',
     ];
 
     /**
@@ -57,6 +55,18 @@ class Post extends Model implements HasMedia
      */
     protected $hidden = [
         'media'
+    ];
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = [
+        'user',
+        'user.profile',
+        'comments',
+        'likes',
     ];
 
     /**
@@ -93,7 +103,6 @@ class Post extends Model implements HasMedia
         return $this->hasMany(Comment::class);
     }
 
-
     /**
      * Get the absolute url for the post.
      *
@@ -112,16 +121,6 @@ class Post extends Model implements HasMedia
     public function getFromNowAttribute()
     {
         return $this->created_at->diffForHumans();
-    }
-
-    /**
-     * Get is post liked by current user.
-     *
-     * @return bool
-     */
-    public function getLikedAttribute()
-    {
-        return $this->liked();
     }
 
     /**
