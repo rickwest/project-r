@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('post/new', 'PostController@create')->name('post.create');
     Route::get('/post/{post}', 'PostController@show')->name('post.show');
     Route::post('/post', 'PostController@store')->name('post.store');
+    Route::delete('/post/{post}', 'PostController@destroy');
 
     // Post Comment
     Route::get('/post/{post}/comments', 'PostCommentController@index');
