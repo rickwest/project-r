@@ -18,6 +18,16 @@ class Comment extends Model
     ];
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = [
+        'user',
+        'user.profile'
+    ];
+
+    /**
      * The user that the comment belongs to.
      *
      * @return BelongsTo
