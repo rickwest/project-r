@@ -1,6 +1,31 @@
 <template>
 <div class="card">
-    <form class="card-header" @submit.prevent="submit">
+    <ul class="list-group card-list-group">
+        <li class="list-group-item py-5" v-for="comment in comments">
+            <div class="media">
+                <div v-if="comment.user.profile.avatar" class="media-object avatar avatar-md mr-4" :style="`background-image: url(${comment.user.profile.avatar})`"></div>
+                <div v-else-if="comment.user.profile.initials" class="media-object avatar avatar-md mr-4">{{ comment.user.profile.initials }}</div>
+                <div class="media-body">
+                    <div class="media-heading">
+                        <a class="text-default" :href="`/${comment.user.name}`">{{ comment.user.name }}</a>
+                    </div>
+                    <div class="text-muted">
+                        {{ comment.body }}
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted">12 min</small>
+                       <comment-actions
+                           :comment-id="comment.id"
+                           :auth-user-id="authUserId"
+                           :initial-likes="comment.likes"
+                       >
+                       </comment-actions>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <form class="card-footer" @submit.prevent="submit">
         <div class="input-group">
             <input
                 type="text"
@@ -17,23 +42,14 @@
             </span>
         </div>
     </form>
-    <ul class="list-group card-list-group">
-        <li class="list-group-item" v-for="comment in comments">
-            <div class="media">
-                <div v-if="comment.user.profile.avatar" class="media-object avatar mr-4" :style="`background-image: url(${comment.user.profile.avatar})`"></div>
-                <div v-else-if="comment.user.profile.initials" class="media-object avatar mr-4">{{ comment.user.profile.initials }}</div>
-                <div class="media-body text-muted">
-                    <a class="text-default" :href="`/${comment.user.name}`">{{ comment.user.name }}</a> {{ comment.body }}
-                </div>
-            </div>
-        </li>
-    </ul>
 </div>
 </template>
 
 <script>
+    import CommentActions from "./CommentActions";
     export default {
-        props: ['postId'],
+        components: {CommentActions},
+        props: ['postId', 'authUserId'],
         data() {
             return {
                 comments: [],

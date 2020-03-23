@@ -29,3 +29,8 @@ Broadcast::channel('post.{post_id}.comment', function ($user) {
 Broadcast::channel('post.{post_id}.like', function ($user) {
     return Auth::check();
 });
+
+// Comment Like
+Broadcast::channel('comment.{comment_id}.like', function ($user) {
+    return Auth::check();
+});

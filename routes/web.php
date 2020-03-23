@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     // Post Like
     Route::put('/post/{post}/like', 'PostLikeController');
 
+    // Comment Like
+    Route::put('/comment/{comment}/like', 'CommentLikeController');
+
     // Media
     Route::post('/media', 'MediaController@store');
     Route::delete('/media', 'MediaController@destroy');

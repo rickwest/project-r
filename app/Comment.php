@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
 {
+    use Likeable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +26,8 @@ class Comment extends Model
      */
     protected $with = [
         'user',
-        'user.profile'
+        'user.profile',
+        'likes',
     ];
 
     /**
