@@ -25,14 +25,14 @@
         </a>
     </div>
     <div class="card-body d-flex flex-column">
-        <h4 v-if="post.title"><a :href="post.url">{{ post.title }}</a></h4>
-        <div class="text-muted">{{ fullBody ? post.body : excerpt }} <a v-if="!fullBody" :href="`/post/${post.id}`">more</a></div>
+        <h4 v-if="post.title"><a :href="post.url">{{ post.title | capitalize }}</a></h4>
+        <div class="text-muted">{{ (fullBody ? post.body : excerpt) | capitalize }} <a v-if="!fullBody" :href="`/post/${post.id}`">more</a></div>
         <div class="d-flex align-items-center pt-5 mt-auto">
             <div v-if="post.user.profile.avatar" class="avatar avatar-md mr-3" :style="`background-image: url(${post.user.profile.avatar})`"></div>
             <div v-else-if="post.user.profile.initials" class="avatar avatar-md mr-3">{{ post.user.profile.initials }}</div>
             <div>
                 <a :href="`/${post.user.name}`" class="text-default">{{ post.user.name }}</a>
-                <small class="d-block text-muted">{{ post.from_now }}</small>
+                <small class="d-block text-muted">{{ post.created_at | moment('from') }}</small>
             </div>
             <div class="ml-auto text-muted">
                 <post-actions

@@ -44,7 +44,6 @@ class Post extends Model implements HasMedia
      */
     protected $appends = [
         'url',
-        'from_now',
         'images',
     ];
 
@@ -111,16 +110,6 @@ class Post extends Model implements HasMedia
     public function getUrlAttribute()
     {
         return route('post.show', ['post' => $this], true);
-    }
-
-    /**
-     * Get the human readable difference of the created at date 'from now'. E.g.'2 days ago'.
-     *
-     * @return string
-     */
-    public function getFromNowAttribute()
-    {
-        return $this->created_at->diffForHumans();
     }
 
     /**

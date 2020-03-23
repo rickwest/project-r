@@ -29,6 +29,7 @@
         "tabler-ui": "0.0.34",
         "vue-autosuggest": "^2.0.4",
         "vue-infinite-loading": "^2.4.5",
+        "vue-moment": "^4.1.0",
         "vue2-dropzone": "^3.6.0"
     }
 }

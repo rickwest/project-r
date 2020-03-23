@@ -9,11 +9,11 @@
                     <div class="media-heading">
                         <a class="text-default" :href="`/${comment.user.name}`">{{ comment.user.name }}</a>
                     </div>
-                    <div class="text-muted">
-                        {{ comment.body }}
+                    <div class="text-muted comment-body">
+                        {{ comment.body | capitalize }}
                     </div>
                     <div class="d-flex justify-content-between">
-                        <small class="text-muted">12 min</small>
+                        <small class="text-muted">{{ comment.created_at | moment("from") }}</small>
                        <comment-actions
                            :comment-id="comment.id"
                            :auth-user-id="authUserId"
