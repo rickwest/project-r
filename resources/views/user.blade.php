@@ -5,5 +5,9 @@
 @endsection
 
 @section('content-center')
-<posts user_id="{{ $user->id }}"></posts>
+<posts :user-id='@json($user->id)'></posts>
+@endsection
+
+@section('content-right')
+@include('partials.suggestions')
 @endsection

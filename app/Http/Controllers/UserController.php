@@ -16,7 +16,8 @@ class UserController extends Controller
     public function __invoke(User $user)
     {
         return view('user', [
-            'user' => $user
+            'user' => $user,
+            'suggestions' => User::latest()->take(5)->get(),
         ]);
     }
 }
