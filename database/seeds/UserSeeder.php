@@ -13,16 +13,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = factory(User::class)->create([
-           'name' => 'rick',
-           'email' => 'rickwestdev@gmail.com',
-           'password' => bcrypt('rick1234'),
+        factory(User::class)->create([
+           'email' => 'user@shu.ac.uk',
+           'password' => bcrypt('20E!xI&$Zx'),
         ]);
 
-        $user = factory(User::class)->create([
-            'name' => 'mick',
-            'email' => 'm.marriott@shu.ac.uk',
-            'password' => bcrypt('mick1234'),
+        factory(User::class)->create([
+            'email' => 'user2@shu.ac.uk',
+            'password' => bcrypt('20E!xI&$Zx'),
         ]);
     }
 }
