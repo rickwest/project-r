@@ -1,78 +1,110 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+![Project-R](public/images/logo.svg)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Project-R is a prototype social media style application, built as part of my Applications, Architectures and Frameworks uni module.
+It is designed specifically to highlight some of the benefit's of using a web application framework. 
 
-## About Laravel
+Those benefits include, but not limited to:
+- Good documentation and support
+- Efficiency, in both cost and development velocity
+- Security
+- Integrations with other software solutions
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Whilst only a prototype, this application does include much of the core functionality for an application of this type. For example, the ability to register, login, edit your profile, create posts with images and also comment and like given posts. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Framework and Technologies
 
-## Learning Laravel
+This application is built using [Laravel](https://laravel.com/). Laravel is an MVC framework and not only is it the most popular PHP framework, it is also one of the most popular backend frameworks in the world.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The reason for choosing Laravel for this project was primarily a result of it's popularity and the community surrounding it, but also because it offers a number official integrations with third party solutions such as [AWS S3](https://aws.amazon.com/s3/) for object storage, [Algolia](https://www.algolia.com/) for search and [Pusher](https://pusher.com/) for real-time pub-sub messaging.
+Considering my project brief, I quickly identified that integrations like these could quickly and easily help me add core functionality to this application.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Due to the nature of the domain of this application, Project-R also implements much of its view layer utilising the [Vue.js](https://vuejs.org/) JavaScript framework.
+Laravel provides easy integration with Vue.js out of the box and owing to the fact that Vue.js is a progressive JavaScript framework, I was able to use it to add dynamic components without having to build a complete single page application, thus significantly reducing development time.
 
-## Laravel Sponsors
+---
+ 
+## Getting started
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Requirements
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+* PHP 7.2 or higher;
+* [Composer](https://getcomposer.org/)
+* [Node.js and NPM](https://nodejs.org/en/)
 
-## Contributing
+### Installation
+ 
+#### Clone the repo               
+To get started with the installation of this project, first clone the repository:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/rickwest/project-r.git
+```
 
-## Code of Conduct
+#### Install dependencies
+Then install the dependencies:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+#### Install JavaScript dependencies and build the assets
+Followed by the installation of the javascript dependencies:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+npm install
+```
 
-## License
+You can then build the projects assets:
+```bash
+npm run dev
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### .env
+The config for you application is defined in a `.env` file. To generate this, simply copy the `.env.example` template.
+
+```cp .env.example .env``` 
+
+**Whilst in `.env` you should also add your AWS, Algolia and Pusher credentials:**
+
+#### Database
+Next, you will need to configure and create a database. The example `.env` includes the default config for an SQLite database, so in this case, you can move straight onto the next steps, migrating and seeding the database. 
+
+#### Migrate the database
+Now you have configured the database connection you can migrate the database by running:
+
+```bash
+php artisan migrate
+```
+
+#### Seed the database
+Laravel provides a convenient way to seed the database with demo data for testing and development:
+
+```bash
+php artisan db:seed
+```
+
+#### Authentication
+As well as populating the database with demo data, the seed command also creates a user.
+Log in to the system wih these credentials:
+
+**email: user@shu.ac.uk**
+
+**password: 20E!xI&$Zx**
+
+### Usage
+
+If you've got this far then you should be all set and ready to run the application. You can configure a web server like Nginx or Apache
+but the easiest thing to do in development is simply run PHP's built in web server:
+
+ ```bash
+ php artisan serve
+ ```
+
+This should enable you to access <http://localhost:8000> in your browser. Navigate to `http://127.0.0.1:8000/login` and sign in with the credentials above.
+
+### Demo
+
+### Support
+If you need some help or want to ask anything just drop me an [email](mailto:b7042643@my.shu.ac.uk).
