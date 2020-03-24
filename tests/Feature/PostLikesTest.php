@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-class LikesTest extends TestCase
+class PostLikesTest extends TestCase
 {
     use DatabaseMigrations;
 
