@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\PostPosted;
 use App\Post;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -81,10 +82,12 @@ class PostController extends Controller
      *
      * @param Post $post
      * @return JsonResponse
-     * @throws \Exception
+     * @throws AuthorizationException
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete');
+
         $post->delete();
 
         return response()->json([], 204);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Events\CommentPosted;
 use App\Post;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -46,14 +47,19 @@ class PostCommentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified comment from storage.
      *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param Comment $comment
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function destroy(Comment $comment)
     {
-        //
+        $this->authorize('delete');
+
+        $comment->delete();
+
+        return response()->json([], 204);
     }
 
     /**
