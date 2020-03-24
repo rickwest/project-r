@@ -53,11 +53,7 @@ trait Likeable
     {
         $userId = $userId ?? $this->getAuthenticatedUserId();
 
-        $like = $this->likes()->where('user_id', $userId)->delete();
-
-//        if ($like) {
-//            $like->delete();
-//        }
+        $this->likes()->where('user_id', $userId)->delete();
     }
 
     /**
@@ -66,7 +62,7 @@ trait Likeable
      * @param int|null $userId
      * @return bool
      */
-    public function liked(?int $userId = null): bool
+    public function isLikedBy(?int $userId = null): bool
     {
         $userId = $userId ?? $this->getAuthenticatedUserId();
 
@@ -84,7 +80,7 @@ trait Likeable
     {
         $userId = $userId ?? $this->getAuthenticatedUserId();
 
-        $this->liked($userId) ? $this->unlike($userId) : $this->like($userId);
+        $this->isLikedBy($userId) ? $this->unlike($userId) : $this->like($userId);
     }
 
     /**

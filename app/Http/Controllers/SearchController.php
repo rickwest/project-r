@@ -9,8 +9,8 @@ class SearchController extends Controller
 {
     public function __invoke(Request $request)
     {
-
-        return User::search($request->get('q', ''))->get()
+        return User::search($request->get('q', ''))
+            ->take(5)->get()
             ->load('profile');
     }
 }
