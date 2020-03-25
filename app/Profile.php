@@ -87,7 +87,10 @@ class Profile extends Model implements HasMedia
      */
     public function getInitialsAttribute()
     {
-        return $this->first_name[0] . $this->last_name[0];
+        if ($this->first_name && $this->last_name) {
+            return $this->first_name[0] . $this->last_name[0];
+        }
+        return '';
     }
 
     /**
